@@ -3,7 +3,8 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 const request = axios.create({
-	baseURL: 'http://localhost:8090/',
+	// baseURL: 'http://localhost:8090/',
+	baseURL: 'https://thisdcw.cn/blog-api/',
 	timeout: 10000,
 })
 

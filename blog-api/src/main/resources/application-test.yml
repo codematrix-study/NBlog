@@ -1,0 +1,133 @@
+# 服务器端口号
+server:
+  port: 8090
+
+# 博客配置
+blog:
+  # 博客名称
+  name: Naccl's Blog
+  # 生产环境需要修改为服务器ip或域名
+  # 后端服务URL https://api.naccl.top/blog
+  api: http://localhost:${server.port}
+  # 后台管理URL https://admin.naccl.top
+  cms: http://localhost:8080
+  # 后台界面URL https://naccl.top
+  view: http://localhost:8081
+
+# 数据库连接信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.79.4.139:3306/cw_blog?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: this201314
+
+  # Redis连接信息
+  redis:
+    host: 120.79.4.139
+    password: this201314
+    port: 6379
+    database: 2
+    timeout: 10000ms
+
+  # 邮箱配置 - 阿里云邮箱,其他邮箱服务配置参考关键字"spring mail 服务器"
+  mail:
+    host: smtp.mxhichina.com
+    port: 465
+    username: admin@example.com
+    password: 123456
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+          ssl:
+            enable: true
+
+# MyBatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 日志级别配置
+logging:
+  level:
+    root: info
+    top.naccl: debug
+  file:
+    name: blog-api/log/blog-prod
+
+# Token配置
+token:
+  # 1000 * 60 * 60 * 24 * 3 token过期时间
+  expireTime: 259200000
+  # 生产环境务必修改此配置,否则无法保证token安全性
+  secretKey: zP9KxR7Q5M4A2LwHfJ8cU5N6sD0YBvTg
+
+# 评论配置
+comment:
+  notify:
+    # 博主收到评论通知方式: Telegram=tg 邮箱=mail (访客评论通知固定为邮箱方式)
+    channel: mail
+  # 新评论是否默认公开
+  default-open: true
+
+# Telegram Bot配置
+# 如果选择邮箱通知方式,以下可以无需修改
+tg:
+  bot:
+    api: https://api.telegram.org/bot
+    # bot的token,可以从 @BotFather 处获取
+    token: 1234567890:qwertyuiopasdfghjklzxcvbnm
+    # 自己账号和bot的聊天会话id
+    chat-id: 1234567890
+    # 是否使用代理
+    use-proxy: false
+    # 是否使用反向代理
+    use-reverse-proxy: true
+    # 反向代理URL,请自行搭建,示例API随时可能关闭
+    reverse-proxy-url: https://tg-api-open.naccl.workers.dev
+
+# 代理配置,如不使用无需修改 (目前用于发送Telegram请求)
+http:
+  proxy:
+    server:
+      host: 127.0.0.1
+      port: 7890
+      timeout: 10000
+
+# 上传配置
+upload:
+  # 评论中QQ头像存储方式: 本地:local GitHub:github 又拍云:upyun
+  channel: local
+
+  # 本地文件上传配置
+  file:
+    # 静态文件上传访问路径 Windows环境例如: C:/Users/nblog/Desktop/upload/ Linux环境例如:/home/nblog/upload/
+    path: /Users/naccl/Desktop/upload/
+    access-path: /image/**
+    resources-locations: file:${upload.file.path}
+
+  # GitHub配置 - 如果选择其他上传方式,以下可以无需修改
+  github:
+    # GitHub token 教程见 https://naccl.github.io/PictureHosting/#/pictureHosting/help
+    token: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    username: Naccl
+    # 需要用作图床的GitHub仓库名
+    repos: test
+    # 需要上传至仓库的路径 开头需要"/" 结尾不要"/"
+    repos-path: /comment/avatar
+
+  # 又拍云配置 - 帮助文档见 https://help.upyun.com/knowledge-base/quick_start/
+  upyun:
+    # 存储空间名称
+    bucket-name: nblog
+    # 操作员名称
+    username: naccl
+    # 操作员密码
+    password: xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    # 存储路径
+    path: /comment/avatar
+    # CDN访问域名
+    domain: https://cdn.example.com

@@ -34,12 +34,12 @@
 				<a rel="external nofollow noopener" href="https://beian.miit.gov.cn/" target="_blank" style="color:#ffe500">{{ siteInfo.beian }}</a>
 			</p>
 
-			<div class="github-badge" v-for="(item,index) in badges" :key="index">
-				<a rel="external nofollow noopener" :href="item.url" target="_blank" :title="item.title">
-					<span class="badge-subject">{{ item.subject }}</span>
-					<span class="badge-value" :class="`bg-${item.color}`">{{ item.value }}</span>
-				</a>
-			</div>
+<!--			<div class="github-badge" v-for="(item,index) in badges" :key="index">-->
+<!--				<a rel="external nofollow noopener" :href="item.url" target="_blank" :title="item.title">-->
+<!--					<span class="badge-subject">{{ item.subject }}</span>-->
+<!--					<span class="badge-value" :class="`bg-${item.color}`">{{ item.value }}</span>-->
+<!--				</a>-->
+<!--			</div>-->
 
 		</div>
 	</footer>
